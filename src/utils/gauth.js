@@ -94,10 +94,11 @@ export default {
         return res.data.access_token;
       });
   },
-  fetch(url) {
+  http(method, url, data = {}) {
     return Axios({
       url,
-      method: 'GET',
+      method,
+      data,
       headers: {
         Authorization: `Bearer ${store.state.cache.google.accessToken}`,
         'Content-type': 'application/json',
