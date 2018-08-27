@@ -17,7 +17,7 @@
       <template v-if="!connected">
         <v-btn color="blue" class="white--text" @click="init()">
           <v-icon right dark>lock_open</v-icon>
-          {{ $t('auth.connect', { service: 'Google'} ) }}
+          {{ $t('auth.connect_to', { service: 'Google'} ) }}
         </v-btn>
       </template>
       <template v-else>

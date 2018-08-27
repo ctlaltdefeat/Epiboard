@@ -46,8 +46,8 @@
     "deny": "Deny"
   },
   "auth": {
-    "connect": "Connect to {service}",
-    "disconnect": "Disconnect"
+    "connect_to": "Connect to {service}",
+    "disconnect_from": "Disconnect from {service}"
   },
   "home": {
     "no_cards": "No cards.",
@@ -97,6 +97,10 @@
     "design": {
       "full": "Full",
       "toolbar": "Toolbar"
+    },
+    "auth": {
+      "title": "Connected services",
+      "desc": "Enabling cards to access features of these services"
     },
     "placeholder": {
       "background": "From URL, e.g. https://i.imgur.com/foVYQ6T.jpg",

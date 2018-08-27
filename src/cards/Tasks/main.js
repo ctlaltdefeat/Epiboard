@@ -14,8 +14,13 @@ export default {
       currentId: null,
       tasks: [],
       lists: [],
-      connected: true,
     };
+  },
+  computed: {
+    connected() {
+      return this.$store.state.cache.google.accessToken
+        && this.$store.state.cache.google.refreshToken;
+    },
   },
   mounted() {
     if (this.VALID_CACHE) {
@@ -23,8 +28,7 @@ export default {
       this.$emit('init', false);
       return;
     }
-    if (!this.$utils.gauth.isConnected()) {
-      this.connected = false;
+    if (!this.connected) {
       this.$emit('init');
       return;
     }
