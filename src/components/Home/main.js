@@ -1,6 +1,7 @@
 import ResizeObserver from 'resize-observer-polyfill';
 import VSpeedDial from 'vuetify/es5/components/VSpeedDial';
 import Card from '@/components/Card';
+import Cards from '@/cards';
 import Muuri from 'muuri';
 
 // @vue/component
@@ -28,12 +29,9 @@ export default {
     };
   },
   computed: {
-    cardsCmp() {
-      return Cards;
-    },
     cards() {
       const { cards } = this.$store.state;
-      return [...new Set(cards)].filter(f => this.cardsCmp[f]);
+      return [...new Set(cards)].filter(f => Cards[f]);
     },
     emptyCards() {
       return Object.keys(this.cards).length === 0;
@@ -46,7 +44,7 @@ export default {
       return keys.reduce((obj, key) => {
         const { [key]: _, ...tmp } = obj;
         return tmp;
-      }, this.cardsCmp);
+      }, Cards);
     },
     showFab() {
       return Object.keys(this.availableCards).length;
@@ -70,12 +68,12 @@ export default {
     onDrag() {
       const cards = this.grid.getItems()
         .filter(f => f.isActive())
-        .map(f => f.getElement().dataset.id);
+        .map(f => f.getElement().id);
       this.$store.commit('SET_CARDS', cards);
       this.$ga.event('cards', 'order', cards.join(', '), cards.length);
     },
     delCard(key) {
-      const elem = document.querySelector(`[data-id='${key}']`);
+      const elem = document.getElementById(key);
       this.grid.hide(elem, {
         onFinish: () => {
           this.$ga.event('cards', 'delete', key, 0);
@@ -89,7 +87,7 @@ export default {
     addCard(key) {
       this.$store.commit(key === 'Changelog' ? 'ADD_CARD_FIRST' : 'ADD_CARD', key);
       this.$nextTick(() => {
-        const elem = document.querySelector(`[data-id='${key}']`);
+        const elem = document.getElementById(key);
         if (key === 'Changelog') this.grid.add(elem, { index: 0 });
         else this.grid.add(elem);
       });
@@ -113,7 +111,7 @@ export default {
         dragSortInterval: 0,
         layoutOnInit: false,
         sortData: {
-          index: (item, el) => this.cards.indexOf(el.dataset.id),
+          index: (item, el) => this.cards.indexOf(el.id),
         },
       });
       if (this.cards.length) {

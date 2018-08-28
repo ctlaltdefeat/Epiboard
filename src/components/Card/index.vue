@@ -4,14 +4,14 @@
       <v-toolbar
         :color="theme ? 'elevation-0' : 'primary'"
         :absolute="!!theme"
-        :prominent="!!showSettings || !!subTitle"
+        :prominent="showSettings || !!subTitle"
         :dense="!showSettings && !subTitle" class="head-drag" card>
         <v-layout :style="{ color: titleColor }" column wrap>
           <v-toolbar-title v-if="!showSettings && title" :title="id">
             {{ title }}
           </v-toolbar-title>
           <v-toolbar-title v-else>{{ defaultTitle }}</v-toolbar-title>
-          <span v-if="showSettings" class="subheading">{{ $t('settings.title') }}</span>
+          <span v-t="'settings.title'" v-if="showSettings" class="subheading"/>
           <span v-else-if="subTitle" :title="subTitle" class="subheading">{{ subTitle }}</span>
         </v-layout>
         <v-spacer/>
@@ -39,13 +39,13 @@
             </v-list-tile>
             <v-divider v-if="actions.length"/>
             <v-list-tile v-if="cmp.settings" @click.stop="showSettings=true">
-              <v-list-tile-title>{{ $t('settings.title') }}</v-list-tile-title>
+              <v-list-tile-title v-t="'settings.title'"/>
             </v-list-tile>
             <v-list-tile v-if="debug" @click="reload()">
-              <v-list-tile-title>{{ $t('card.reload') }}</v-list-tile-title>
+              <v-list-tile-title v-t="'card.reload'"/>
             </v-list-tile>
             <v-list-tile @click="remove()">
-              <v-list-tile-title>{{ $t('card.remove') }}</v-list-tile-title>
+              <v-list-tile-title v-t="'card.remove'"/>
             </v-list-tile>
           </v-list>
         </v-menu>

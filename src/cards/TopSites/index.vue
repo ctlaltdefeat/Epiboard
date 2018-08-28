@@ -16,7 +16,7 @@
     </v-list>
     <div v-else class="text-xs-center">
       <v-icon x-large>find_in_page</v-icon>
-      <h2 class="subheading">{{ $t('TopSites.empty') }}</h2>
+      <h2 v-t="'TopSites.empty'" class="subheading"/>
     </div>
   </v-card-text>
 </template>

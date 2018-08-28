@@ -1,14 +1,14 @@
 <template>
   <v-card :width="500" hover raised dark class="primary foreground--text mx-auto mt-3">
     <v-card-title class="secondary">
-      <h3 class="headline">{{ $t('onboarding.settings.title') }}</h3>
+      <h3 v-t="'onboarding.settings.title'" class="headline"/>
     </v-card-title>
     <v-card-text>
-      <h4 class="headline">{{ $t('settings.langs') }}</h4>
+      <h4 v-t="'settings.langs'" class="headline"/>
       <v-autocomplete
         :items="langs"
         v-model="settings.lang" :label="$t('settings.choose.lang')"/>
-      <h4 class="subheading">{{ $t('settings.choose.design') }}</h4>
+      <h4 v-t="'settings.choose.design'" class="subheading"/>
       <v-radio-group v-model="settings.header.design" :mandatory="false">
         <v-radio :label="$t('settings.design.full')" value="full"/>
         <v-radio :label="$t('settings.design.toolbar')" value="toolbar"/>
@@ -34,11 +34,9 @@
       </v-layout>
     </v-card-text>
     <v-card-actions class="secondary">
-      <v-btn color="teal lighten-4" flat @click="$emit('prev')">
-        {{ $t('onboarding.previous') }}
-      </v-btn>
+      <v-btn v-t="'onboarding.previous'" color="teal lighten-4" flat @click="$emit('prev')"/>
       <v-spacer/>
-      <v-btn color="teal lighten-4" flat @click="$emit('next')">{{ $t('onboarding.next') }}</v-btn>
+      <v-btn v-t="'onboarding.next'" color="teal lighten-4" flat @click="$emit('next')"/>
     </v-card-actions>
   </v-card>
 </template>

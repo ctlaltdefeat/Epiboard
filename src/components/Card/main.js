@@ -2,6 +2,7 @@ import * as VList from 'vuetify/es5/components/VList';
 import * as VToolbar from 'vuetify/es5/components/VToolbar';
 import { VMenu, VDivider } from 'vuetify';
 import Toast from '@/components/Toast';
+import Cards from '@/cards';
 
 // @vue/component
 export default {
@@ -47,14 +48,9 @@ export default {
       },
     },
   },
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
+      id: this.$vnode.key,
       title: null,
       subTitle: null,
       cmp: {

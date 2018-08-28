@@ -13,7 +13,7 @@
           <v-card-text class="scroll-content">
             <div v-if="!tab.data.length" class="text-xs-center">
               <v-icon x-large>find_in_page</v-icon>
-              <h2 class="subheading">{{ $t('Sessions.empty') }}</h2>
+              <h2 v-t="'Sessions.empty'" class="subheading"/>
             </div>
             <v-list v-else dense>
               <v-list-tile
