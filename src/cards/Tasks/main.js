@@ -79,6 +79,9 @@ export default {
       this.editMode.splice(idx, 1);
     },
     onStatus(task) {
+      if (task.completed) {
+        delete task.completed; // eslint-disable-line
+      }
       Api.updateTask(this.currentId, task);
     },
     delTask(task, idx) {
