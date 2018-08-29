@@ -2,7 +2,7 @@
   <v-list dense>
     <v-list-tile v-for="item in data" :key="item.id" :href="item.url">
       <v-list-tile-avatar :size="16">
-        <slot name="icon" :item="item">
+        <slot :item="item" name="icon">
           <img v-if="item.icon" :src="item.icon">
           <v-icon v-else-if="icon">insert_drive_file</v-icon>
         </slot>
@@ -15,7 +15,7 @@
       </v-list-tile-content>
       <v-list-tile-action>
         <v-list-tile-action-text>
-          <slot name="action" :item="item">
+          <slot :item="item" name="action">
             <span v-if="item.date">
               {{ item.date.toLocaleDateString($i18n.locale, $options.dateOption) }}
             </span>

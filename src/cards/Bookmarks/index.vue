@@ -29,7 +29,7 @@
               <template slot="action" slot-scope="{item}">
                 <templace v-if="item.url">
                   {{ new Date(item.dateAdded)
-                    .toLocaleDateString($i18n.locale, $options.dateOption) }}
+                  .toLocaleDateString($i18n.locale, $options.dateOption) }}
                 </templace>
                 <v-icon
                   v-else-if="foldersId.indexOf(item.id) === -1"
