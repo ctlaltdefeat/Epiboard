@@ -40,7 +40,7 @@
               :label="$tc('settings.onOff', settings.trends.enabled)" class="mt-0" hide-details/>
           </v-flex>
           <v-autocomplete
-            :items="country"
+            :items="$options.countries"
             :disabled="!settings.trends.enabled"
             v-model="settings.trends.country" :label="$t('settings.choose.trends')"/>
         </v-layout>
@@ -68,7 +68,7 @@
         <v-layout>
           <v-flex xs6 class="picker mr-3">
             <li
-              v-for="color in palette"
+              v-for="color in $options.palette"
               :key="color" :style="{ 'background-color': color }" @click="themeChange(color)">
               <div v-show="settings.theme.primary.toLowerCase() === color" class="color-dot"/>
             </li>
@@ -170,7 +170,7 @@
               <a alt="Donate" href="https://paypal.me/ARouillard">
                 <v-icon small color="red">favorite</v-icon>
               </a> by
-              <span><a href="https://arouillard.fr">Alexis Rouillard</a> | {{ version }}</span>
+              <a href="https://arouillard.fr">Alexis Rouillard</a> | {{ $options.version }}
             </p>
           </v-flex>
         </v-layout>

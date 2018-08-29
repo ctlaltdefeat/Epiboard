@@ -11,7 +11,7 @@
         <v-btn
           v-for="(value, key) in availableCards"
           :key="key" color="green" dark small @click="addCard(key)">
-          <span v-t="`${key}.title`"/>
+          {{ key }}
         </v-btn>
       </v-speed-dial>
     </transition>

@@ -28,7 +28,7 @@
           v-model="settings.trends.enabled"
           :label="$tc('settings.onOff', settings.trends.enabled)" class="mt-0" hide-details/>
         <v-autocomplete
-          :items="countries"
+          :items="$options.countries"
           :disabled="!settings.trends.enabled"
           v-model="settings.trends.country" :label="$t('settings.choose.trends')"/>
       </v-layout>
@@ -55,9 +55,9 @@ export default {
     VAutocomplete,
     VTextField,
   },
+  countries,
   data() {
     return {
-      countries,
       settings: this.$store.state.settings,
     };
   },

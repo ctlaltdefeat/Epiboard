@@ -1,1 +1,1 @@
-export default CardsObj;
+export default Object.freeze(CardsObj);

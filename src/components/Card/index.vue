@@ -7,7 +7,7 @@
         :prominent="showSettings || !!subTitle"
         :dense="!showSettings && !subTitle" class="head-drag" card>
         <v-layout :style="{ color: titleColor }" column wrap>
-          <v-toolbar-title v-if="!showSettings && title" :title="id">
+          <v-toolbar-title v-if="!showSettings && title" :title="$vnode.key">
             {{ title }}
           </v-toolbar-title>
           <v-toolbar-title v-else>{{ defaultTitle }}</v-toolbar-title>
@@ -17,13 +17,13 @@
         <v-spacer/>
         <v-progress-circular
           v-show="!loaded"
-          :title="$t('card.loading', { id })"
+          :title="$t('card.loading', { id: $vnode.key })"
           :style="{ color: actionsColor }"
           :size="25" :width="2" indeterminate/>
         <v-btn
           v-if="loaded === 2 && !showSettings"
           :style="{ color: actionsColor }"
-          :title="$t('card.error_reload', { id })" flat icon @click="reload()">
+          :title="$t('card.error_reload', { id: $vnode.key })" flat icon @click="reload()">
           <v-icon>warning</v-icon>
         </v-btn>
         <v-menu v-if="!showSettings" lazy bottom offset-y>
@@ -38,7 +38,7 @@
               <v-list-tile-title>{{ action.title }}</v-list-tile-title>
             </v-list-tile>
             <v-divider v-if="actions.length"/>
-            <v-list-tile v-if="cmp.settings" @click.stop="showSettings=true">
+            <v-list-tile v-if="$options.settings" @click.stop="showSettings=true">
               <v-list-tile-title v-t="'settings.title'"/>
             </v-list-tile>
             <v-list-tile v-if="debug" @click="reload()">
@@ -68,22 +68,22 @@
       </v-toolbar>
       <keep-alive>
         <component
-          v-init="id"
+          v-init="$vnode.key"
           v-show="!showSettings"
           ref="card"
           :actions.sync="actions"
           :cardtitle.sync="title"
           :subtitle.sync="subTitle"
           :settings="settings"
-          :is="cmp.card"
+          :is="$options.card"
           :key="hash"
           @init="init"
         />
       </keep-alive>
       <component
         v-initSettings="settings"
-        v-if="showSettings && cmp.settings"
-        :is="cmp.settings"
+        v-if="showSettings && $options.settings"
+        :is="$options.settings"
         :key="`${hash}-settings`"
       />
     </v-card>

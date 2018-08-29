@@ -9,7 +9,8 @@
         <span>{{ cpu.modelName }}</span>
         <p>
           {{ cpu.archName }} -
-          {{ cpu.numOfProcessors }} {{ $tc('System.core', cpu.numOfProcessors) }}
+          {{ cpu.numOfProcessors }}
+          <span v-t="{ path: 'System.core', choice: cpu.numOfProcessors }"/>
         </p>
         <v-progress-linear
           v-for="(core, key) in cpu.loads"

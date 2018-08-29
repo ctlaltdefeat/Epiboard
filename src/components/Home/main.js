@@ -14,17 +14,17 @@ export default {
   directives: {
     resize: {
       inserted(el, binding, { context }) {
-        context.ro.observe(el);
+        context.$options.ro.observe(el);
       },
       unbind(el, binding, { context }) {
-        context.ro.unobserve(el);
+        context.$options.ro.unobserve(el);
       },
     },
   },
+  grid: null,
+  ro: null,
   data() {
     return {
-      grid: null,
-      ro: null,
       fab: false,
     };
   },
@@ -52,21 +52,24 @@ export default {
   },
   created() {
     this.checkVersion();
-    this.ro = new ResizeObserver(this.onResize);
+    this.$options.ro = new ResizeObserver(this.onResize);
   },
   mounted() {
     this.initGrid();
   },
+  beforeDetroy() {
+    this.$options.ro.detach();
+  },
   methods: {
     onResize(entries) {
-      if (!this.grid) return;
+      if (!this.$options.grid) return;
       for (let i = 0; i < entries.length; i += 1) {
-        this.grid.refreshItems(entries[i].target);
+        this.$options.grid.refreshItems(entries[i].target);
       }
-      this.grid.layout(true);
+      this.$options.grid.layout(true);
     },
     onDrag() {
-      const cards = this.grid.getItems()
+      const cards = this.$options.grid.getItems()
         .filter(f => f.isActive())
         .map(f => f.getElement().id);
       this.$store.commit('SET_CARDS', cards);
@@ -74,7 +77,7 @@ export default {
     },
     delCard(key) {
       const elem = document.getElementById(key);
-      this.grid.hide(elem, {
+      this.$options.grid.hide(elem, {
         onFinish: () => {
           this.$ga.event('cards', 'delete', key, 0);
           this.$store.commit('DEL_CARD_SETTINGS', key);
@@ -88,8 +91,8 @@ export default {
       this.$store.commit(key === 'Changelog' ? 'ADD_CARD_FIRST' : 'ADD_CARD', key);
       this.$nextTick(() => {
         const elem = document.getElementById(key);
-        if (key === 'Changelog') this.grid.add(elem, { index: 0 });
-        else this.grid.add(elem);
+        if (key === 'Changelog') this.$options.grid.add(elem, { index: 0 });
+        else this.$options.grid.add(elem);
       });
       this.$ga.event('cards', 'add', key, 1);
     },
@@ -104,7 +107,7 @@ export default {
       }
     },
     initGrid() {
-      this.grid = new Muuri('#card-container', {
+      this.$options.grid = new Muuri('#card-container', {
         dragEnabled: true,
         layout: { fillGaps: true },
         dragStartPredicate: { handle: '.head-drag' },
@@ -115,9 +118,9 @@ export default {
         },
       });
       if (this.cards.length) {
-        this.grid.sort('index', { layout: 'instant' });
+        this.$options.grid.sort('index', { layout: 'instant' });
       }
-      this.grid.on('dragEnd', this.onDrag);
+      this.$options.grid.on('dragEnd', this.onDrag);
     },
   },
 };

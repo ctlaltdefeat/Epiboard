@@ -5,10 +5,9 @@
       :dark="!$store.state.settings.theme.light"
       :light="$store.state.settings.theme.light"
       slider-color="foreground" color="primary" grow show-arrows>
-      <v-tab v-for="tab in tabs" :key="tab.id">
-        <span v-if="tab.folder">{{ tab.name }}</span>
-        <span v-t="tab.name" v-else/>
-      </v-tab>
+      <v-tab><span v-t="'Bookmarks.recents'"/></v-tab>
+      <v-tab><span v-t="'Bookmarks.all'"/></v-tab>
+      <v-tab v-for="tab in folders" :key="tab.id">{{ tab.name }}</v-tab>
       <v-tabs-items>
         <v-tab-item v-for="tab in tabs" :key="`tab-${tab.id}`" :id="`tab-${tab.id}`" lazy>
           <v-card-text class="scroll-content">
@@ -47,7 +46,8 @@
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-list-tile-action-text v-if="item.url">
-                    {{ new Date(item.dateAdded).toLocaleDateString($i18n.locale, dateOption) }}
+                    {{ new Date(item.dateAdded)
+                    .toLocaleDateString($i18n.locale, $options.dateOption) }}
                   </v-list-tile-action-text>
                   <v-icon
                     v-else-if="foldersId.indexOf(item.id) === -1"

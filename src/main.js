@@ -5,6 +5,7 @@ import {
   Vuetify,
   VApp,
   VGrid,
+  VToolbar,
   VCard,
   VBtn,
   VIcon,
@@ -40,6 +41,7 @@ Vue.use(Vuetify, {
   components: {
     Vuetify,
     VApp,
+    VToolbar,
     VCard,
     VGrid,
     VBtn,
