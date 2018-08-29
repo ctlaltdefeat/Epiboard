@@ -1,9 +1,10 @@
 <template>
   <v-tabs
+    id="bookmarks"
     v-model="active"
     :dark="!$store.state.settings.theme.light"
     :light="$store.state.settings.theme.light"
-    id="bookmarks" slider-color="foreground" color="primary" grow show-arrows>
+    slider-color="foreground" color="primary" grow show-arrows>
     <v-tab><span v-t="'Bookmarks.recents'"/></v-tab>
     <v-tab><span v-t="'Bookmarks.all'"/></v-tab>
     <v-tab v-for="tab in folders" :key="tab.id">{{ tab.name }}</v-tab>
