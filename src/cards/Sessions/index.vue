@@ -4,7 +4,7 @@
       :dark="!$store.state.settings.theme.light"
       :light="$store.state.settings.theme.light"
       slider-color="foreground" color="primary" grow show-arrows>
-      <v-tab key="recents"><span v-t="'Sessions.recents'"/></v-tab>
+      <v-tab><span v-t="'Sessions.recents'"/></v-tab>
       <v-tab v-for="device in devices" :key="device.deviceName">{{ device.deviceName }}</v-tab>
       <v-tabs-items>
         <v-tab-item v-for="tab in tabs" :key="`tab-${tab.id}`" :id="`tab-${tab.id}`" lazy>
