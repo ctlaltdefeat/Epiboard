@@ -47,14 +47,4 @@ export default {
   dateOption: { hour: '2-digit', minute: '2-digit' },
 };
 </script>
-<style lang="scss" rel='stylesheet/scss' scoped>
- .v-list__tile__avatar {
-    min-width: 29px!important;
-  }
-  /deep/ .v-list__tile {
-    height: 34px!important;
-  }
-  .v-list__tile__action {
-    flex-shrink: 0!important;
-  }
-</style>
+<style lang="scss" rel='stylesheet/scss' src="./style.scss" scoped></style>
